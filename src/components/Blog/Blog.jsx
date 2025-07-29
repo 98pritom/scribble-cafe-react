@@ -1,10 +1,10 @@
 import { CiBookmark } from "react-icons/ci";
 
-const Blog = ({ blog, handleBookmarks }) => {
+const Blog = ({ blog, handleBookmarks, handleReadingTime }) => {
     // console.log(blog);
-    const { title, author, author_image, cover_image, posted_date, reading_time, hashtags } = blog;
+    const { id, title, author, author_image, cover_image, posted_date, reading_time, hashtags } = blog;
     return (
-        <div className='mb-20'>
+        <div className='mb-20 space-y-2'>
             <img src={cover_image} alt={`Cover image of ${title}`} className="w-full h-auto object-contain" />
             <div className='flex justify-between items-center mt-5'>
                 {/* author img */}
@@ -17,7 +17,7 @@ const Blog = ({ blog, handleBookmarks }) => {
                 </div>
                 {/* reading time */}
                 <div className='flex items-center gap-2'>
-                    <p>{reading_time}</p>
+                    <p>{reading_time} min read</p>
                     <button onClick={() => handleBookmarks(blog)} className="hover:cursor-pointer"><CiBookmark className="text-2xl" /></button>
                 </div>
             </div>
@@ -27,6 +27,7 @@ const Blog = ({ blog, handleBookmarks }) => {
                     hashtags.map(hashtag => <span className='pr-2 text-gray-500 font-light' key={hashtag}><a href="#">{hashtag}</a></span>)
                 }
             </p>
+            <button className="text-purple-900 font-bold underline hover:cursor-pointer" onClick={() => handleReadingTime(id, reading_time)}>Mark as read</button>
         </div>
     );
 };
